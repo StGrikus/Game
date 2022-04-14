@@ -8,12 +8,14 @@ public class MyGdxGame extends ApplicationAdapter {
 	SpriteBatch batch;
 	Background bg;
 	Bird bird;
+	Obstacles obstacles;
 	
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
 		bg = new Background();
 		bird = new Bird();
+		obstacles = new Obstacles();
 	}
 
 	@Override
@@ -23,12 +25,14 @@ public class MyGdxGame extends ApplicationAdapter {
 		batch.begin();
 		bg.render(batch);
 		bird.render(batch);
+		obstacles.render(batch);
 		batch.end();
 	}
 
 	public void update() {
 		bg.update();
 		bird.update();
+		obstacles.update();
 	}
 	
 	@Override
