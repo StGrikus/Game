@@ -2,6 +2,7 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 import java.util.Random;
@@ -11,11 +12,13 @@ public class Obstacles {
         Vector2 position;
         float speed;
         int offset;
+        Rectangle emptySpace;
 
         public WallPair(Vector2 pos) {
             position = pos;
             speed = 4;
             offset = new Random().nextInt(250);
+            emptySpace = new Rectangle(position.x, position.y - offset + 300, 50, betweenDistance);
         }
 
         public void update() {
@@ -23,10 +26,11 @@ public class Obstacles {
             if(position.x <- 50) {
                 position.x = 1280;
             }
+            emptySpace.x = position.x;
         }
     }
 
-    WallPair[] obs;
+    static WallPair[] obs;
     Texture txt;
     int betweenDistance;
 
@@ -51,6 +55,14 @@ public class Obstacles {
     public void update() {
         for (int i = 0; i < obs.length; i++) {
             obs[i].update();
+        }
+    }
+
+    public void recreate(){
+        int startPocitionX = 500;
+        for (int i = 0; i < obs.length; i++) {
+            obs[i] = new WallPair(new Vector2(startPocitionX,0));
+            startPocitionX += 300;
         }
     }
 }
